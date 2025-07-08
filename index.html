@@ -1,41 +1,31 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Historia Piorunka 💕</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Historia Piorunka 💕</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <audio autoplay loop>
-        <source src="romantic_music.mp3" type="audio/mpeg" />
-    </audio>
 
-    <div id="envelope-screen">
-        <div id="envelope" onclick="openEnvelope()">📩</div>
-        <p>Kliknij kopertę, by poznać historię Piorunka!</p>
-    </div>
+<div id="envelope-screen" class="screen">
+  <div class="envelope-wrapper">
+    <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Koperta" width="80" id="open-envelope">
+    <p>Kliknij kopertę, by poznać historię Piorunka!</p>
+  </div>
+</div>
 
-    <div id="main-content" class="hidden">
-        <h1>To będzie piękna historia Piorunka 💕</h1>
-        
-        <div class="gallery">
-            <h2>📸 Galeria</h2>
-            <div class="gallery-container">
-                <img src="piorun_gallery_1.jpg" />
-                <img src="piorun_gallery_2.jpg" />
-                <img src="piorun_gallery_3.jpg" />
-            </div>
-        </div>
+<div id="main-content" class="screen hidden">
+  <h1>To będzie piękna strona Piorunka 💕</h1>
+  <div class="gallery">
+    <img src="piorun_gallery_1.jpg">
+    <img src="piorun_gallery_2.jpg">
+    <img src="piorun_gallery_3.jpg">
+  </div>
+  <button id="shuffle-btn">Zagraj w puzzle</button>
+  <div id="puzzle-board"></div>
+  <p id="success-message" class="hidden">Brawo! Ułożyłeś puzzle 🎉</p>
+</div>
 
-        <div class="puzzle-section">
-            <h2>🧩 Zagraj w puzzle!</h2>
-            <button onclick="shufflePuzzle()">Losuj puzzle</button>
-            <div id="puzzle-board"></div>
-            <p id="success-message" class="hidden">🎉 Brawo! Ułożyłeś Piorunka! 🎉</p>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
