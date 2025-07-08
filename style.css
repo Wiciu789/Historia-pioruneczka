@@ -20,7 +20,7 @@ body {
     font-size: 1.2em;
 }
 
-#envelope {
+#open-envelope {
     font-size: 60px;
     cursor: pointer;
     animation: bounce 2s infinite;
