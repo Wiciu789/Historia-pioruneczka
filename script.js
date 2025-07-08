@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function createPuzzle() {
     const board = document.getElementById("puzzle-board");
     const positions = [...Array(9).keys()];
-    positions.forEach(i => {
+   positions.forEach(i => {
         const piece = document.createElement("div");
         piece.classList.add("puzzle-piece");
         piece.style.backgroundImage = "url('piorun_gallery_1.jpg')";
