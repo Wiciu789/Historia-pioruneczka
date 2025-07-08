@@ -47,19 +47,16 @@ function shufflePuzzle() {
 }
 
 function swapPiece(clickedPiece) {
-    const emptyIndex = pieces.findIndex(p => !p.parentElement);
-    if (emptyIndex !== -1) return;
+  const board = document.getElementById("puzzle-board");
+  const currentPieces = Array.from(board.children);
+  const index = currentPieces.indexOf(clickedPiece);
 
-    const board = document.getElementById("puzzle-board");
-    const currentPieces = Array.from(board.children);
-    const index = currentPieces.indexOf(clickedPiece);
-
-    if (index > 0) {
-        [currentPieces[index], currentPieces[index - 1]] = [currentPieces[index - 1], currentPieces[index]];
-        board.innerHTML = "";
-        currentPieces.forEach(p => board.appendChild(p));
-        checkWin(currentPieces);
-    }
+  if (index > 0) {
+    [currentPieces[index], currentPieces[index - 1]] = [currentPieces[index - 1], currentPieces[index]];
+    board.innerHTML = "";
+    currentPieces.forEach(p => board.appendChild(p));
+    checkWin(currentPieces);
+  }
 }
 
 function checkWin(currentPieces) {
@@ -95,3 +92,6 @@ function playMusic() {
     audio.volume = 0.4;
     audio.play();
 }
+document.getElementById("open-envelope").addEventListener("click", () => {
+  playMusic();
+});
