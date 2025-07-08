@@ -32,7 +32,7 @@ function createPuzzle() {
         const piece = document.createElement("div");
         piece.classList.add("puzzle-piece");
         piece.style.backgroundImage = "url('piorun_gallery_1.jpg')";
-        piece.style.backgroundPosition = ${-(i % 3) * 100}px ${-Math.floor(i / 3) * 100}px;
+      piece.style.backgroundPosition = -${(i % 3) * 100}px -${Math.floor(i / 3) * 100}px;
         piece.dataset.index = i;
         piece.addEventListener("click", () => swapPiece(piece));
         pieces.push(piece);
