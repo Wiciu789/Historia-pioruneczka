@@ -26,20 +26,19 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function createPuzzle() {
-    const board = document.getElementById("puzzle-board");
-    const positions = [...Array(9).keys()];
-   positions.forEach(i => {
-        const piece = document.createElement("div");
-        piece.classList.add("puzzle-piece");
-        piece.style.backgroundImage = "url('piorun_gallery_1.jpg')";
-      piece.style.backgroundPosition = -${(i % 3) * 100}px -${Math.floor(i / 3) * 100}px`;
-        piece.dataset.index = i;
-        piece.addEventListener("click", () => swapPiece(piece));
-        pieces.push(piece);
-        board.appendChild(piece);
-    });
+  const board = document.getElementById("puzzle-board");
+  const positions = [...Array(9).keys()];
+  positions.forEach(i => {
+    const piece = document.createElement("div");
+    piece.classList.add("puzzle-piece");
+    piece.style.backgroundImage = "url('piorun_gallery_1.jpg')";
+    piece.style.backgroundPosition = ${(i % 3) * 100}px ${Math.floor(i / 3) * 100}px;
+    piece.dataset.index = i;
+    piece.addEventListener("click", () => swapPiece(piece));
+    pieces.push(piece);
+    board.appendChild(piece);
+  });
 }
-
 function shufflePuzzle() {
     const board = document.getElementById("puzzle-board");
     const shuffled = [...pieces].sort(() => 0.5 - Math.random());
