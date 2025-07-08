@@ -1,33 +1,42 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Historia Piorunka 💕</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-
-<div id="envelope-screen" class="screen hidden">
-
-  <div class="envelope-wrapper">
-    <img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" alt="Koperta" width="80" id="open-envelope">
-    <p>Kliknij kopertę, by poznać historię Piorunka!</p>
+  <!-- Ekran z kopertą -->
+  <div id="envelope-screen" class="screen">
+    <div class="envelope-wrapper">
+      <img src="envelope.png" alt="Koperta" width="100" id="open-envelope" />
+      <p>Kliknij kopertę, by poznać historię Piorunka! 💌</p>
+    </div>
   </div>
-</div>
 
-<div id="main-content" class="screen hidden">
-  <h1>To będzie piękna strona Piorunka 💕</h1>
-  <div class="gallery">
-    <img src="piorun_gallery_1.jpg">
-    <img src="piorun_gallery_2.jpg">
-    <img src="piorun_gallery_3.jpg">
+  <!-- Główna treść po otwarciu -->
+  <div id="main-content" class="screen hidden">
+    <h1>To będzie piękna strona Piorunka 💕</h1>
+
+    <!-- Galeria -->
+    <div class="gallery">
+      <img src="photo1.jpg" alt="Piorun 1" />
+      <img src="photo2.jpg" alt="Piorun 2" />
+      <img src="photo3.jpg" alt="Piorun 3" />
+    </div>
+
+    <!-- Puzzle -->
+    <button id="shuffle-btn">🧩 Zagraj w puzzle</button>
+    <div id="puzzle-board"></div>
+    <p id="success-message" class="hidden">Brawo! Ułożyłeś puzzle 🎉</p>
   </div>
-  <button id="shuffle-btn">Zagraj w puzzle</button>
-  <div id="puzzle-board"></div>
-  <p id="success-message" class="hidden">Brawo! Ułożyłeś puzzle 🎉</p>
-</div>
 
-<script src="script.js"></script>
+  <!-- Muzyka w tle -->
+  <audio autoplay loop>
+    <source src="music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script src="script.js"></script>
 </body>
 </html>
