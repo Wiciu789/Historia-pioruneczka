@@ -1,97 +1,69 @@
-let isShuffled = false;
-let pieces = [];
-
 document.addEventListener("DOMContentLoaded", () => {
-    const openEnvelopeBtn = document.getElementById("open-envelope");
-    const envelopeScreen = document.getElementById("envelope-screen");
-    const mainContent = document.getElementById("main-content");
-    const puzzleBoard = document.getElementById("puzzle-board");
-    const shuffleBtn = document.getElementById("shuffle-btn");
-    const successMessage = document.getElementById("success-message");
+  const envelope = document.getElementById("open-envelope");
+  const envelopeScreen = document.getElementById("envelope-screen");
+  const mainContent = document.getElementById("main-content");
+  const shuffleBtn = document.getElementById("shuffle-btn");
+  const puzzleBoard = document.getElementById("puzzle-board");
+  const successMsg = document.getElementById("success-message");
 
-    openEnvelopeBtn.addEventListener("click", () => {
-        envelopeScreen.classList.add("hidden");
-        mainContent.classList.remove("hidden");
-        playMusic();
-    });
-
-    shuffleBtn.addEventListener("click", () => {
-        if (!isShuffled) {
-            shufflePuzzle();
-            isShuffled = true;
-        }
-    });
-
-    createPuzzle();
-});
-
-function createPuzzle() {
-  const board = document.getElementById("puzzle-board");
-  const positions = [...Array(9).keys()];
-  positions.forEach(i => {
-    const piece = document.createElement("div");
-    piece.classList.add("puzzle-piece");
-    piece.style.backgroundImage = "url('piorun_gallery_1.jpg')";
-  piece.style.backgroundPosition = `${(i % 3) * 100}px ${Math.floor(i / 3) * 100}px`;
-    piece.dataset.index = i;
-    piece.addEventListener("click", () => swapPiece(piece));
-    pieces.push(piece);
-    board.appendChild(piece);
+  envelope.addEventListener("click", () => {
+    envelopeScreen.classList.add("hidden");
+    mainContent.classList.remove("hidden");
+    playConfetti(); // Efekt 🎉
   });
-}
-function shufflePuzzle() {
-    const board = document.getElementById("puzzle-board");
-    const shuffled = [...pieces].sort(() => 0.5 - Math.random());
-    board.innerHTML = "";
-    shuffled.forEach(piece => board.appendChild(piece));
-}
 
-function swapPiece(clickedPiece) {
-  const board = document.getElementById("puzzle-board");
-  const currentPieces = Array.from(board.children);
-  const index = currentPieces.indexOf(clickedPiece);
+  shuffleBtn.addEventListener("click", () => {
+    puzzleBoard.innerHTML = "";
+    successMsg.classList.add("hidden");
 
-  if (index > 0) {
-    [currentPieces[index], currentPieces[index - 1]] = [currentPieces[index - 1], currentPieces[index]];
-    board.innerHTML = "";
-    currentPieces.forEach(p => board.appendChild(p));
-    checkWin(currentPieces);
-  }
-}
+    const pieces = [
+      { id: "piece1", src: "puzzle1.png" },
+      { id: "piece2", src: "puzzle2.png" }
+    ];
 
-function checkWin(currentPieces) {
-    const correct = currentPieces.every((piece, index) => {
-        return parseInt(piece.dataset.index) === index;
+    // Losowanie kolejności
+    pieces.sort(() => Math.random() - 0.5);
+
+    pieces.forEach((piece, index) => {
+      const img = document.createElement("img");
+      img.src = piece.src;
+      img.id = piece.id;
+      img.classList.add("puzzle-piece");
+      img.draggable = true;
+
+      img.addEventListener("dragstart", (e) => {
+        e.dataTransfer.setData("text/plain", piece.id);
+      });
+
+      img.addEventListener("drop", (e) => {
+        e.preventDefault();
+        const draggedId = e.dataTransfer.getData("text/plain");
+        const draggedEl = document.getElementById(draggedId);
+        const target = e.target;
+
+        const parent = target.parentNode;
+        parent.insertBefore(draggedEl, target);
+      });
+
+      img.addEventListener("dragover", (e) => {
+        e.preventDefault();
+      });
+
+      puzzleBoard.appendChild(img);
     });
-    if (correct) {
-        showConfetti();
-        document.getElementById("success-message").classList.remove("hidden");
-    }
-}
 
-function showConfetti() {
-    for (let i = 0; i < 100; i++) {
-        const confetti = document.createElement("div");
-        confetti.classList.add("confetti");
-        confetti.style.left = `${Math.random() * 100}vw`;
-        confetti.style.top = -`${Math.random() * 20}px`;
-        confetti.style.backgroundColor = getRandomColor();
-        document.body.appendChild(confetti);
-        setTimeout(() => confetti.remove(), 3000);
-    }
-}
+    // Sprawdzenie poprawności po chwili
+    setTimeout(() => {
+      const current = [...puzzleBoard.children].map(el => el.id);
+      if (current.join("") === "piece1piece2") {
+        successMsg.classList.remove("hidden");
+        playConfetti();
+      }
+    }, 3000);
+  });
 
-function getRandomColor() {
-    const colors = ["#ff66a3", "#ff99cc", "#ffccff", "#ffb3d9"];
-    return colors[Math.floor(Math.random() * colors.length)];
-}
-
-function playMusic() {
-    const audio = new Audio("romantic_music.mp3");
-    audio.loop = true;
-    audio.volume = 0.4;
-    audio.play();
-}
-document.getElementById("open-envelope").addEventListener("click", () => {
-  playMusic();
+  function playConfetti() {
+    // Tymczasowo alert — możesz zamienić na animację
+    alert("🎉 Konfetti! Udało się!");
+  }
 });
